@@ -13,6 +13,12 @@
 
 [What It Does](#-what-this-tool-does) • [Quick Start](#-quick-start) • [Why This Matters](#-why-this-experiment-was-valuable) • [Documentation](#-documentation)
 
+---
+
+![Flow Type Corrector Workflow](docs/screenshots/workflow-diagram.png)
+
+*Production n8n workflow: 11-stage validation pipeline with AI-powered misclassification detection*
+
 </div>
 
 ---
@@ -180,18 +186,6 @@ python scripts/evaluate.py \
 ```
 
 ## 🏗️ How It Works
-
-### n8n Workflow Visualization
-
-<div align="center">
-
-![Flow Type Corrector Workflow](docs/screenshots/workflow-diagram.png)
-
-*Production n8n workflow showing the complete validation pipeline*
-
-</div>
-
-The workflow implements a sophisticated validation pipeline with the following key components:
 
 ### Pipeline Stages
 
