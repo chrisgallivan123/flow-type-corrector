@@ -1,0 +1,5 @@
+id,title,description,label
+1,Fix null pointer in SSO callback,500 error on token refresh,Defect
+2,Add analytics dashboard,Create MAU/retention visualizations,Feature
+3,Spike: vector DB options,Compare Pinecone vs OpenSearch for RAG,Risk
+4,Refactor auth module,Reduce complexity and add tests,Debt
