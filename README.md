@@ -181,30 +181,41 @@ python scripts/evaluate.py \
 
 ## 🏗️ How It Works
 
-### Processing Pipeline
+### n8n Workflow Visualization
 
-```mermaid
-graph LR
-    A[Work Item + Current Type] --> B[n8n Webhook]
-    B --> C[Input Validation]
-    C --> D[LLM Analysis]
-    D --> E[Misclassification Detection]
-    E --> F{Misclassified?}
-    F -->|Yes| G[Generate Correction]
-    F -->|No| H[No Change Needed]
-    G --> I[Confidence Scoring]
-    I --> J[Reasoning Generation]
-    J --> K[Output for Review]
-    H --> K
-```
+<div align="center">
+
+![Flow Type Corrector Workflow](docs/screenshots/workflow-diagram.png)
+
+*Production n8n workflow showing the complete validation pipeline*
+
+</div>
+
+The workflow implements a sophisticated validation pipeline with the following key components:
+
+### Pipeline Stages
+
+1. **📥 Webhook Input** – Receives work items via HTTP webhook
+2. **📄 Extract from File** – Parses CSV/JSON input data
+3. **🔪 Chunker** – Batches work items for efficient processing
+4. **📊 Before Stats** – Captures initial classification state
+5. **🤖 AI Agent + OpenAI Chat Model** – LLM-powered misclassification detection
+6. **🔀 Merge** – Combines results with original data
+7. **🔧 Apply Corrections (Expand)** – Formats suggested corrections
+8. **✅ Schema Enforcer** – Validates output structure
+9. **📈 After Stats** – Tracks changes and confidence scores
+10. **📦 Convert to File** – Exports results in viz-turbo format
+11. **📤 Respond to Webhook** – Returns structured JSON response
 
 ### Simple Summary
 
 1. **Load Work Items** – CSV or API export with existing Flow Item Types
-2. **LLM Evaluation** – Analyzes textual clues to assess correctness of current type
-3. **Misclassification Detection** – Identifies when Flow Item Type appears incorrect
-4. **Suggestion Generation** – Recommends corrected type only when misclassification is likely
-5. **Human Review** – Results exported for analysis, visualization, or correction
+2. **Batch Processing** – Efficiently chunk large datasets for optimal LLM performance
+3. **LLM Evaluation** – Analyzes textual clues to assess correctness of current type
+4. **Misclassification Detection** – Identifies when Flow Item Type appears incorrect
+5. **Suggestion Generation** – Recommends corrected type only when misclassification is likely
+6. **Statistical Tracking** – Before/after metrics for transparency
+7. **Human Review** – Results exported for analysis, visualization, or correction
 
 ### What Makes This Useful
 
@@ -213,6 +224,8 @@ This tool **validates existing classifications** rather than assigning types fro
 - Improves data quality for Flow Metrics
 - Helps teams learn appropriate Flow Item Type usage
 - Provides coaching opportunities during Flow Reviews
+- Enables batch processing with configurable chunk sizes
+- Tracks statistics for measuring impact
 
 📖 **Detailed Documentation:** See [`docs/architecture.md`](docs/architecture.md) for comprehensive diagrams, decision logic, and extension points.
 
